@@ -118,7 +118,7 @@ class Schema(ma.Schema):
             if len(fields) > 1:
                 field.schema.check_relations(fields[1:])
 
-    @ma.post_dump(pass_many=True)
+    @ma.post_dump(pass_collection=True)
     def format_json_api_response(self, data, many, **kwargs):
         """Post-dump hook that formats serialized data as a top-level JSON API object.
 
