@@ -8,7 +8,7 @@ from marshmallow.fields import Field
 
 # Make core fields importable from marshmallow_jsonapi
 from marshmallow.fields import *  # noqa
-from marshmallow.base import SchemaABC
+from marshmallow.schema import Schema
 from marshmallow.utils import is_collection, missing as missing_, get_value
 
 from .utils import resolve_params
@@ -124,9 +124,9 @@ class Relationship(BaseRelationship):
         exclude = getattr(self, "exclude", ())
         context = getattr(self, "context", {})
 
-        if isinstance(self.__schema, SchemaABC):
+        if isinstance(self.__schema, Schema):
             return self.__schema
-        if isinstance(self.__schema, type) and issubclass(self.__schema, SchemaABC):
+        if isinstance(self.__schema, type) and issubclass(self.__schema, Schema):
             self.__schema = self.__schema(only=only, exclude=exclude, context=context)
             return self.__schema
         if isinstance(self.__schema, (str, bytes)):
