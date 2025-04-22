@@ -188,7 +188,7 @@ class Schema(ma.Schema):
             payload[key] = value
         return payload
 
-    @ma.pre_load(pass_many=True)
+    @ma.pre_load(pass_collection=True)
     def unwrap_request(self, data, many, **kwargs):
         if "data" not in data:
             raise ma.ValidationError(
